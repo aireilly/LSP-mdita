@@ -1,10 +1,10 @@
 from LSP.plugin import AbstractPlugin, ClientConfig, register_plugin, unregister_plugin
 from LSP.plugin.core.protocol import Location
-from LSP.plugin.core.typing import Any, Callable, List, Mapping, Optional
 from LSP.plugin.locationpicker import LocationPicker
 import os
 import shutil
 import sublime
+from typing import Any, Callable, List, Mapping, Optional
 from urllib.parse import unquote, urlparse
 
 
@@ -71,8 +71,7 @@ class MditaLsp(AbstractPlugin):
         if directory and not os.path.exists(directory):
             os.makedirs(directory)
         if not os.path.exists(path):
-            with open(path, 'w') as f:
-                f.close()
+            open(path, 'w').close()
         window = sublime.active_window()
         if window:
             window.open_file(path)
