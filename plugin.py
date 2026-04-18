@@ -8,7 +8,7 @@ import sublime
 from urllib.parse import unquote, urlparse
 
 
-SESSION_NAME = "mdita-lsp"
+SESSION_NAME = "mdita"
 
 _SEARCH_PATHS = [
     os.path.expanduser("~/go/bin"),
