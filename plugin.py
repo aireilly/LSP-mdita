@@ -75,7 +75,9 @@ class MditaLsp(AbstractPlugin):
         if directory and not os.path.exists(directory):
             os.makedirs(directory)
         if not os.path.exists(path):
-            open(path, 'w').close()
+            stem = os.path.splitext(os.path.basename(path))[0]
+            with open(path, 'w') as f:
+                f.write("# " + stem + "\n")
         window = sublime.active_window()
         if window:
             window.open_file(path)
