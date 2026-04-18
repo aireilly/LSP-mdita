@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[!!! ${1:note}
+    ${2:Admonition content.}
+]]></content>
+    <tabTrigger>admonition</tabTrigger>
+    <scope>text.html.markdown</scope>
+    <description>MDITA Admonition Block (note, tip, warning)</description>
+</snippet>

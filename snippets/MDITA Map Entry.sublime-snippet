@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[- [${1:Topic Title}](${2:path/to/topic}.md)]]></content>
+    <tabTrigger>mapentry</tabTrigger>
+    <scope>text.html.markdown</scope>
+    <description>MDITA Map Entry</description>
+</snippet>

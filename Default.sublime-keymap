@@ -1,0 +1,84 @@
+[
+    // Find References (uses the custom mdita-lsp.findReferences handler)
+    {
+        "keys": ["shift+f12"],
+        "command": "lsp_symbol_references",
+        "args": {"side_by_side": false},
+        "context": [
+            {"key": "selector", "operand": "text.html.markdown"},
+            {"key": "lsp.session_with_capability", "operand": "referencesProvider"}
+        ]
+    },
+    // Go to Definition
+    {
+        "keys": ["f12"],
+        "command": "lsp_symbol_definition",
+        "args": {"side_by_side": false},
+        "context": [
+            {"key": "selector", "operand": "text.html.markdown"},
+            {"key": "lsp.session_with_capability", "operand": "definitionProvider"}
+        ]
+    },
+    // Rename Symbol (headings, links)
+    {
+        "keys": ["f2"],
+        "command": "lsp_symbol_rename",
+        "context": [
+            {"key": "selector", "operand": "text.html.markdown"},
+            {"key": "lsp.session_with_capability", "operand": "renameProvider"}
+        ]
+    },
+    // Document Symbols (navigate headings)
+    {
+        "keys": ["ctrl+shift+o"],
+        "command": "lsp_document_symbols",
+        "context": [
+            {"key": "selector", "operand": "text.html.markdown"},
+            {"key": "lsp.session_with_capability", "operand": "documentSymbolProvider"}
+        ]
+    },
+    // Workspace Symbols (search across files)
+    {
+        "keys": ["ctrl+shift+r"],
+        "command": "lsp_workspace_symbols",
+        "context": [
+            {"key": "selector", "operand": "text.html.markdown"},
+            {"key": "lsp.session_with_capability", "operand": "workspaceSymbolProvider"}
+        ]
+    },
+    // Trigger Code Actions (includes Generate Table of Contents, Add to Map)
+    {
+        "keys": ["ctrl+shift+a"],
+        "command": "lsp_code_actions",
+        "context": [
+            {"key": "selector", "operand": "text.html.markdown"},
+            {"key": "lsp.session_with_capability", "operand": "codeActionProvider"}
+        ]
+    },
+    // Hover information (link previews, heading info, keyref targets)
+    {
+        "keys": ["ctrl+shift+h"],
+        "command": "lsp_hover",
+        "context": [
+            {"key": "selector", "operand": "text.html.markdown"},
+            {"key": "lsp.session_with_capability", "operand": "hoverProvider"}
+        ]
+    },
+    // Trigger completions (wiki links, inline links, keyrefs, front matter fields)
+    {
+        "keys": ["ctrl+space"],
+        "command": "auto_complete",
+        "context": [
+            {"key": "selector", "operand": "text.html.markdown"}
+        ]
+    },
+    // Format Document
+    {
+        "keys": ["ctrl+shift+f"],
+        "command": "lsp_format_document",
+        "context": [
+            {"key": "selector", "operand": "text.html.markdown"},
+            {"key": "lsp.session_with_capability", "operand": "documentFormattingProvider"}
+        ]
+    },
+]

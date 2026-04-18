@@ -1,0 +1,17 @@
+<snippet>
+    <content><![CDATA[---
+\$schema: "${1:urn:oasis:names:tc:mdita:rng:topic.rng}"
+id: ${2:topic-id}
+author: ${3:Author Name}
+---
+
+# ${4:Topic Title}
+
+${5:Short description of the topic}
+
+${6:Topic content goes here.}
+]]></content>
+    <tabTrigger>mdita-topic</tabTrigger>
+    <scope>text.html.markdown</scope>
+    <description>MDITA Topic Template</description>
+</snippet>

@@ -1,0 +1,71 @@
+{
+    "scope": "text.html.markdown",
+    "completions": [
+        {
+            "trigger": "$schema",
+            "contents": "\\$schema: ${1:urn:oasis:names:tc:mdita:rng:topic.rng}",
+            "annotation": "MDITA topic type schema",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "id",
+            "contents": "id: ${1:topic-id}",
+            "annotation": "MDITA topic ID",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "shortdesc",
+            "contents": "shortdesc: ${1:Short description of the topic}",
+            "annotation": "MDITA short description",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "author",
+            "contents": "author: ${1:Author Name}",
+            "annotation": "MDITA author",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "source",
+            "contents": "source: ${1:source-reference}",
+            "annotation": "MDITA source",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "publisher",
+            "contents": "publisher: ${1:Publisher Name}",
+            "annotation": "MDITA publisher",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "permissions",
+            "contents": "permissions: ${1:permissions}",
+            "annotation": "MDITA permissions",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "audience",
+            "contents": "audience: ${1:audience}",
+            "annotation": "MDITA audience",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "category",
+            "contents": "category: ${1:category}",
+            "annotation": "MDITA category",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "keyword",
+            "contents": "keyword: ${1:keyword}",
+            "annotation": "MDITA keyword",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "resourceid",
+            "contents": "resourceid: ${1:resource-id}",
+            "annotation": "MDITA resource ID",
+            "kind": "snippet"
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[[${1:link text}](${2:filename}.md#${3:topicID}/${4:sectionID})]]></content>
+    <tabTrigger>fragref</tabTrigger>
+    <scope>text.html.markdown</scope>
+    <description>DITA Fragment ID Link (topicID/sectionID)</description>
+</snippet>

@@ -1,0 +1,9 @@
+{
+    "command": ["mdita-lsp"],
+    // If mdita-lsp is not on PATH, specify the full path:
+    // "command": ["/path/to/mdita-lsp"],
+    "selector": "text.html.markdown",
+    "auto_complete_selector": "text.html.markdown",
+    "inhibit_word_completions": false,
+    "disabled_capabilities": {}
+}

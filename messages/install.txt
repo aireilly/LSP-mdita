@@ -1,0 +1,64 @@
+██╗     ███████╗██████╗       ███╗   ███╗██████╗ ██╗████████╗ █████╗
+██║     ██╔════╝██╔══██╗      ████╗ ████║██╔══██╗██║╚══██╔══╝██╔══██╗
+██║     ███████╗██████╔╝█████╗██╔████╔██║██║  ██║██║   ██║   ███████║
+██║     ╚════██║██╔═══╝ ╚════╝██║╚██╔╝██║██║  ██║██║   ██║   ██╔══██║
+███████╗███████║██║           ██║ ╚═╝ ██║██████╔╝██║   ██║   ██║  ██║
+╚══════╝╚══════╝╚═╝           ╚═╝     ╚═╝╚═════╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝
+
+==============================================================
+
+LSP-mdita is an LSP helper package for the mdita-lsp language
+server (the Go rewrite of MDITA Marksman).
+
+LSP-mdita on its own doesn't do anything. It acts as a glue
+between the LSP package and the mdita-lsp language server.
+Unlike npm-based LSP helpers, this package expects the
+mdita-lsp binary to be pre-installed on your system.
+
+Prerequisites
+-------------
+
+1. Install the LSP package from Package Control.
+2. Build and install mdita-lsp:
+
+   git clone https://github.com/aireilly/mdita-lsp
+   cd mdita-lsp
+   make install
+
+   The binary is installed to ~/.local/bin/mdita-lsp.
+   Ensure ~/.local/bin is on your PATH.
+
+Features
+--------
+
+Everything that the mdita-lsp language server supports:
+
+- Document and workspace symbols from headings.
+- Completion for wiki links, inline links, keyrefs, and YAML
+  front matter fields.
+- Hover preview for links, headings, and keyrefs.
+- Go to Definition and Find References for headings and links.
+- Diagnostics for broken links, MDITA compliance, keyrefs,
+  heading hierarchy, and DITA schema validation.
+- Code Lens with reference counts on headings.
+- Rename refactoring across files.
+- Code actions: generate Table of Contents, add to map,
+  create missing file, convert link types, add front matter.
+- DITA OT build integration (xhtml, dita formats).
+- Document formatting (table alignment, trailing whitespace,
+  heading spacing).
+- Inlay hints for resolved wiki link titles and keyref targets.
+- Semantic token highlighting for wiki links.
+- Linked editing of headings and their intra-doc wiki link refs.
+- Folding ranges for headings, YAML front matter, and ToC.
+- Selection range expansion.
+- File rename refactoring (updates cross-references).
+- MDITA map file (.mditamap) support.
+
+Having Problems?
+----------------
+
+If you encounter any problems with LSP-mdita, please log an
+issue on the issue tracker:
+
+    https://github.com/aireilly/LSP-mdita/issues

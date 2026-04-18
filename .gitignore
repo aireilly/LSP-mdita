@@ -1,0 +1,10 @@
+.claude/
+.mypy_cache
+.pytest_cache
+.tox
+.ropeproject
+*.pyc
+.coverage
+mypycov
+htmlcov
+__pycache__

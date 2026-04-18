@@ -1,0 +1,11 @@
+<snippet>
+    <content><![CDATA[---
+\$schema: "${1:urn:oasis:names:tc:mdita:rng:topic.rng}"
+id: ${2:topic-id}
+author: ${3:Author Name}
+---
+]]></content>
+    <tabTrigger>frontmatter</tabTrigger>
+    <scope>text.html.markdown</scope>
+    <description>YAML Front Matter Block</description>
+</snippet>
