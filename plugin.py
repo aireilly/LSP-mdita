@@ -1,6 +1,6 @@
 from LSP.plugin import AbstractPlugin, ClientConfig, register_plugin, unregister_plugin
 from LSP.plugin.core.protocol import Location
-from LSP.plugin.core.typing import Any, Callable, List, Mapping
+from LSP.plugin.core.typing import Any, Callable, List, Mapping, Optional
 from LSP.plugin.locationpicker import LocationPicker
 import os
 import shutil
@@ -43,7 +43,7 @@ class MditaLsp(AbstractPlugin):
 
     @classmethod
     def on_pre_start(cls, window: sublime.Window, initiating_view: sublime.View,
-                     workspace_folders: List[Any], configuration: ClientConfig) -> str | None:
+                     workspace_folders: List[Any], configuration: ClientConfig) -> Optional[str]:
         binary = _find_binary()
         configuration.command = [binary]
         return None
