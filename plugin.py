@@ -1,13 +1,31 @@
-from LSP.plugin import AbstractPlugin, register_plugin, unregister_plugin
+from LSP.plugin import AbstractPlugin, ClientConfig, register_plugin, unregister_plugin
 from LSP.plugin.core.protocol import Location
 from LSP.plugin.core.typing import Any, Callable, List, Mapping
 from LSP.plugin.locationpicker import LocationPicker
 import os
+import shutil
 import sublime
 from urllib.parse import unquote, urlparse
 
 
 SESSION_NAME = "mdita-lsp"
+
+_SEARCH_PATHS = [
+    os.path.expanduser("~/go/bin"),
+    os.path.expanduser("~/.local/bin"),
+    "/usr/local/bin",
+]
+
+
+def _find_binary() -> str:
+    found = shutil.which("mdita-lsp")
+    if found:
+        return found
+    for d in _SEARCH_PATHS:
+        candidate = os.path.join(d, "mdita-lsp")
+        if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+            return candidate
+    return "mdita-lsp"
 
 
 class MditaLsp(AbstractPlugin):
@@ -18,6 +36,17 @@ class MditaLsp(AbstractPlugin):
     @classmethod
     def needs_update_or_installation(cls) -> bool:
         return False
+
+    @classmethod
+    def additional_variables(cls) -> dict:
+        return {"mdita_lsp_path": _find_binary()}
+
+    @classmethod
+    def on_pre_start(cls, window: sublime.Window, initiating_view: sublime.View,
+                     workspace_folders: List[Any], configuration: ClientConfig) -> str | None:
+        binary = _find_binary()
+        configuration.command = [binary]
+        return None
 
     def on_pre_server_command(self, command: Mapping[str, Any], done_callback: Callable[[], None]) -> bool:
         command_name = command['command']
