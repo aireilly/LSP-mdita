@@ -4,5 +4,18 @@ name: MDITA Markdown
 scope: text.html.markdown.mdita
 version: 2
 file_extensions:
+  - md
   - mditamap
 extends: Packages/Markdown/Markdown.sublime-syntax
+
+contexts:
+  inlines:
+    - meta_prepend: true
+    - match: '\{(?=[^}]*\})'
+      scope: punctuation.definition.attributes.begin.mdita
+      push: inline-attribute
+  inline-attribute:
+    - meta_scope: meta.attributes.mdita
+    - match: '\}'
+      scope: punctuation.definition.attributes.end.mdita
+      pop: 1
