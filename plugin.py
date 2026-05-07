@@ -50,7 +50,10 @@ class MditaLsp(AbstractPlugin):
 
     def on_server_response_async(self, method: str, response: Any) -> None:
         if method == "textDocument/codeLens":
-            response.result = [lens for lens in (response.result or []) if not lens.get("command", {}).get("title", "").startswith("0 ")]
+            response.result = [
+                lens for lens in (response.result or [])
+                if not lens.get("command", {}).get("title", "").startswith("0 ")
+            ]
 
     def on_pre_server_command(self, command: Mapping[str, Any], done_callback: Callable[[], None]) -> bool:
         command_name = command['command']
