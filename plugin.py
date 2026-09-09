@@ -1,6 +1,4 @@
 from LSP.plugin import AbstractPlugin, ClientConfig, register_plugin, unregister_plugin
-from LSP.plugin.core.protocol import Location
-from LSP.plugin.locationpicker import LocationPicker
 import os
 import shutil
 import sublime
@@ -10,9 +8,10 @@ from urllib.parse import unquote, urlparse
 
 SESSION_NAME = "mdita"
 
+# "make install" puts the binary in ~/.local/bin, so look there first.
 _SEARCH_PATHS = [
-    os.path.expanduser("~/go/bin"),
     os.path.expanduser("~/.local/bin"),
+    os.path.expanduser("~/go/bin"),
     "/usr/local/bin",
 ]
 
@@ -57,12 +56,6 @@ class MditaLsp(AbstractPlugin):
 
     def on_pre_server_command(self, command: Mapping[str, Any], done_callback: Callable[[], None]) -> bool:
         command_name = command['command']
-        if command_name == 'mdita-lsp.findReferences':
-            command_arguments = command['arguments']
-            if command_arguments and 'locations' in command_arguments[0]:
-                self._handle_show_references(command_arguments[0]['locations'])
-            done_callback()
-            return True
         if command_name == 'mdita-lsp.createFile':
             command_arguments = command.get('arguments')
             if command_arguments and len(command_arguments) > 0:
@@ -84,26 +77,6 @@ class MditaLsp(AbstractPlugin):
         window = sublime.active_window()
         if window:
             window.open_file(path)
-
-    def _handle_show_references(self, references: List[Location]) -> None:
-        session = self.weaksession()
-        if not session:
-            return
-        view = sublime.active_window().active_view()
-        if not view:
-            return
-        if len(references) == 1:
-            args = {
-                'location': references[0],
-                'session_name': session.config.name,
-            }
-            window = view.window()
-            if window:
-                window.run_command('lsp_open_location', args)
-        elif references:
-            LocationPicker(view, session, references, side_by_side=False)
-        else:
-            sublime.status_message('No references found')
 
 
 def plugin_loaded() -> None:

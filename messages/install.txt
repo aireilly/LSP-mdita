@@ -8,7 +8,7 @@
 ==============================================================
 
 LSP-mdita is an LSP helper package for the mdita-lsp language
-server (the Go rewrite of MDITA Marksman).
+server, the editor tooling for the org.lwdita DITA-OT plug-in.
 
 LSP-mdita on its own doesn't do anything. It acts as a glue
 between the LSP package and the mdita-lsp language server.
@@ -19,11 +19,15 @@ Prerequisites
 -------------
 
 1. Install the LSP package from Package Control.
-2. Build and install mdita-lsp:
+2. Install mdita-lsp. Download a binary from
 
-   git clone https://github.com/aireilly/mdita-lsp
-   cd mdita-lsp
-   make install
+     https://github.com/aireilly/mdita-lsp/releases/latest
+
+   or build from source:
+
+     git clone https://github.com/aireilly/mdita-lsp
+     cd mdita-lsp
+     make install
 
    The binary is installed to ~/.local/bin/mdita-lsp.
    Ensure ~/.local/bin is on your PATH.
@@ -34,26 +38,33 @@ Features
 Everything that the mdita-lsp language server supports:
 
 - Document and workspace symbols from headings.
-- Completion for wiki links, inline links, keyrefs, and YAML
-  front matter fields.
-- Hover preview for links, headings, and keyrefs.
-- Go to Definition and Find References for headings and links.
-- Diagnostics for broken links, MDITA compliance, keyrefs,
-  heading hierarchy, and DITA schema validation.
+- Completion for inline links, heading anchors, keyrefs,
+  conrefs, task section headings, and YAML front matter keys.
+- Hover for links, headings, YAML keys, keyrefs, conrefs,
+  task sections, and implicitly derived task structure.
+- Go to Definition and Find References for headings, links,
+  keyrefs, and conrefs.
+- Diagnostics for broken and ambiguous links, front matter,
+  short descriptions, heading hierarchy, $schema values,
+  MDITA profile violations, footnotes, keyrefs, conrefs,
+  and map validation.
 - Code Lens with reference counts on headings.
 - Rename refactoring across files.
-- Code actions: generate Table of Contents, add to map,
-  create missing file, convert link types, add front matter.
-- DITA OT build integration (xhtml, dita formats).
-- Document formatting (table alignment, trailing whitespace,
-  heading spacing).
-- Inlay hints for resolved wiki link titles and keyref targets.
-- Semantic token highlighting for wiki links.
-- Linked editing of headings and their intra-doc wiki link refs.
-- Folding ranges for headings, YAML front matter, and ToC.
+- Code actions: create missing file, add front matter, add to
+  map, add task sections, fix NBSP, footnotes, heading levels,
+  and build with DITA-OT.
+- DITA-OT build integration (xhtml, dita formats).
+- Document formatting, including table alignment on save.
+- Inlay hints for resolved link, keyref, and conref targets.
+- Semantic token highlighting for {.class} block attributes.
+- Linked editing of heading text.
+- Document highlight for headings and their references.
+- Folding ranges for headings and YAML front matter.
 - Selection range expansion.
 - File rename refactoring (updates cross-references).
-- MDITA map file (.mditamap) support.
+- Map support for .mditamap and .md map files.
+- DITA fragment addressing (file.md#topic-id/element-id).
+- MDITA core and extended profile awareness.
 
 Having Problems?
 ----------------

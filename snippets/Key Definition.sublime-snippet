@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[[${1:key-name}]: ${2:path/to/topic}.md "${3:Title}"]]></content>
+    <tabTrigger>keydef</tabTrigger>
+    <scope>text.html.markdown</scope>
+    <description>Key definition for a map file (&lt;keydef&gt;)</description>
+</snippet>

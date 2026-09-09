@@ -1,0 +1,22 @@
+<snippet>
+    <content><![CDATA[# ${1:Task title} {.task}
+
+${2:Short description of the task.}
+
+## Prerequisites
+
+${3:What the reader needs before starting.}
+
+## Procedure
+
+1.  ${4:First step.}
+2.  ${5:Second step.}
+
+## Verification
+
+${6:How the reader confirms the task worked.}
+]]></content>
+    <tabTrigger>task</tabTrigger>
+    <scope>text.html.markdown</scope>
+    <description>Task topic with prereq, steps, and result sections</description>
+</snippet>

@@ -11,24 +11,25 @@ Unlike npm-based LSP helpers, this package expects the `mdita-lsp` binary to be 
 Everything that the [mdita-lsp](https://github.com/aireilly/mdita-lsp) language server supports, which includes:
 
 - Document and workspace symbols from headings.
-- Completion for wiki links, inline links, keyrefs, and YAML front matter fields.
-- Hover preview for links, headings, and keyref targets.
-- `Go to Definition` and `Find References` for headings, links, and keyrefs.
-- Diagnostics for broken links, missing YAML front matter, short descriptions, heading hierarchy, DITA schema validation, and keyref resolution.
+- Completion for inline links, heading anchors, keyrefs, conrefs, task section headings, and YAML front matter keys.
+- Hover for links, headings, YAML keys, keyrefs, conrefs, task sections, and the task structure the plug-in derives implicitly.
+- `Go to Definition` and `Find References` for headings, links, keyrefs, and conrefs.
+- Diagnostics for broken and ambiguous links, missing front matter, missing short descriptions, heading hierarchy, `$schema` values, MDITA profile violations, footnotes, keyref resolution, conref resolution, and map validation.
 - Code Lens with reference counts on headings.
 - Rename refactoring across files.
-- Code actions: generate Table of Contents, create missing file, add to map, convert wiki links to markdown links, add front matter.
-- DITA OT build integration (xhtml, dita output formats).
-- Document formatting (table alignment, trailing whitespace cleanup, heading spacing, trailing newline).
-- Inlay hints showing resolved wiki link titles and keyref targets.
-- Semantic token highlighting for wiki links.
-- Linked editing of headings and their intra-doc wiki link references.
-- Folding ranges for headings, YAML front matter, and ToC markers.
+- Code actions: create missing file, add front matter, add to map, add task sections, fix NBSP, footnotes, and heading levels, build with DITA-OT.
+- DITA-OT build integration (xhtml, dita output formats).
+- Document formatting (table alignment, trailing whitespace cleanup, heading spacing, trailing newline), including table alignment on save.
+- Inlay hints showing resolved link, keyref, and conref targets.
+- Semantic token highlighting for `{.class}` block attributes.
+- Linked editing of heading text.
+- Document highlight for a heading and its intra-document references.
+- Folding ranges for headings and YAML front matter.
 - Selection range expansion (line, element, section).
-- File rename refactoring (updates wiki links, markdown links, and map references).
-- MDITA map file (`.mditamap`) support.
-- DITA fragment identifier support (`topicID/sectionID`).
-- Diagnostic quick-fixes (NBSP removal, footnote conversion, heading hierarchy).
+- File rename refactoring (updates markdown links and map references).
+- Map support for `.mditamap` files and `.md` files declaring the DITA map schema.
+- DITA fragment addressing (`file.md#topic-id/element-id`).
+- MDITA core and extended profile awareness.
 
 ## Installation
 
@@ -56,7 +57,7 @@ Everything that the [mdita-lsp](https://github.com/aireilly/mdita-lsp) language 
    cp mdita-lsp-linux-amd64 $HOME/.local/bin/mdita-lsp
    ```
 
-   No runtime dependencies are required -- the binary is self-contained (~3.5 MB).
+   No runtime dependencies are required -- the binary is self-contained (~4.3 MB).
 
    Alternatively, build from source:
    ```bash
@@ -96,14 +97,20 @@ If `mdita-lsp` is not on your `PATH`, specify the full path in your user setting
 }
 ```
 
-### MDITA mode
+### Server configuration
 
-To enable MDITA-specific diagnostics (missing YAML front matter, short description validation, heading hierarchy, DITA schema checks), create a `.mdita-lsp.yaml` file in your project root with:
+The server reads `.mdita-lsp.yaml` from the project root, falling back to `~/.config/mdita-lsp/config.yaml`. Settings live under `core.mdita`:
 
 ```yaml
-mdita:
-  enable: true
+core:
+  mdita:
+    enable: true
+    profile: extended          # "core" or "extended"
+    map_extensions: [mditamap]
+    formatTablesOnSave: true
 ```
+
+A document that declares an MDITA `$schema` selects its own profile and overrides `profile`. See the [server README](https://github.com/aireilly/mdita-lsp#configuration) for the full set, including `implicit_task_sections`, per-diagnostic toggles, and DITA-OT build options.
 
 ## Keyboard Shortcuts
 
@@ -116,7 +123,7 @@ All keybindings are scoped to Markdown files (`text.html.markdown`) and require 
 | <kbd>F2</kbd> | Rename Symbol | Rename a heading and update all cross-file references |
 | <kbd>Ctrl+Shift+O</kbd> | Document Symbols | Navigate headings in the current file |
 | <kbd>Ctrl+Shift+R</kbd> | Workspace Symbols | Search symbols across all project files |
-| <kbd>Ctrl+Shift+A</kbd> | Code Actions | Trigger code actions (ToC, add to map, create file, convert links) |
+| <kbd>Ctrl+Shift+A</kbd> | Code Actions | Trigger code actions (create file, add to map, add task sections, front matter, DITA-OT build) |
 | <kbd>Ctrl+Shift+H</kbd> | Hover | Show hover information for links, headings, and keyrefs |
 | <kbd>Ctrl+Space</kbd> | Auto Complete | Trigger completions for links, keyrefs, front matter fields |
 | <kbd>Ctrl+Shift+F</kbd> | Format Document | Format the document (table alignment, whitespace, spacing) |
@@ -134,15 +141,23 @@ Tab-trigger snippets are available in Markdown files for common MDITA constructs
 | `xref` | Cross-reference link | `[link text](filename.md)` |
 | `fragref` | DITA fragment ID link | `[link text](filename.md#topicID/sectionID)` |
 | `mapentry` | MDITA map entry | `- [Topic Title](path/to/topic.md)` |
-| `wiki` | Wiki-style link | `[[target-topic]]` |
 | `keyref` | DITA keyref | `[key-name]` |
+| `keydef` | Key definition for a map | `[key-name]: topic.md "Title"` |
+| `datakeyref` | Inline keyword keyref | `<span data-keyref="key-name">` |
+| `conref` | Content reference | `<p data-conref="shared.md#topic-id/element-id">` |
+| `conkeyref` | Content key reference | `<span data-conkeyref="key-name/element-id">` |
+| `task` | Task topic skeleton | `{.task}` title with Prerequisites, Procedure, Verification |
 | `admonition` | Admonition block | `!!! note` with content |
+
+`admonition` only works in Markdown DITA files with no `$schema`; the plug-in does not enable admonitions for MDITA or for schema-declared topics.
 
 ## Completions
 
 YAML front matter field completions are provided when editing Markdown files. Type the field name and press <kbd>Tab</kbd> to expand:
 
-`$schema`, `id`, `shortdesc`, `author`, `source`, `publisher`, `permissions`, `audience`, `category`, `keyword`, `resourceid`
+`$schema`, `id`, `author`, `source`, `publisher`, `permissions`, `audience`, `category`, `keyword`, `resourceid`
+
+There is no `shortdesc` key. The plug-in builds `<shortdesc>` from the first paragraph after the title, when the title carries a `{.concept}`, `{.task}`, or `{.reference}` class or the topic declares a `$schema`.
 
 ## Reporting issues
 

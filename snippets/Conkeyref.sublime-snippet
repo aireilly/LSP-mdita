@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[<${1:span} data-conkeyref="${2:key-name}/${3:element-id}">${4:fallback text}</${1:span}>]]></content>
+    <tabTrigger>conkeyref</tabTrigger>
+    <scope>text.html.markdown</scope>
+    <description>DITA content key reference (@conkeyref)</description>
+</snippet>

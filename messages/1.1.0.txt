@@ -1,0 +1,43 @@
+LSP-mdita 1.1.0
+===============
+
+Tracks the mdita-lsp 1.0.x releases, which aligned the language
+server one for one with the org.lwdita DITA-OT plug-in.
+
+Requires mdita-lsp 1.0.1 or newer:
+
+    https://github.com/aireilly/mdita-lsp/releases/latest
+
+New snippets
+------------
+
+  task         Task topic with Prerequisites, Procedure, and
+               Verification sections
+  keydef       Key definition for a map file
+  datakeyref   Inline keyword keyref, <span data-keyref="...">
+  conref       Content reference, data-conref
+  conkeyref    Content key reference, data-conkeyref
+
+Removed
+-------
+
+The "wiki" snippet is gone. The plug-in has no wiki-link
+syntax, so [[target]] was never converted to DITA.
+
+The "shortdesc" front matter completion is gone. There is no
+such key. The plug-in builds <shortdesc> from the first
+paragraph after the title, when the title carries a {.concept},
+{.task}, or {.reference} class or the topic declares a $schema.
+
+Changed
+-------
+
+The binary search order now prefers ~/.local/bin, which is
+where "make install" puts mdita-lsp, over ~/go/bin.
+
+The "admonition" snippet is labelled Markdown DITA. Admonitions
+are not available in MDITA or in topics that declare a $schema.
+
+The README and this message no longer advertise wiki links,
+table-of-contents generation, or link conversion. None of them
+exist in the language server.

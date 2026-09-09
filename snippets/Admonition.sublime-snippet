@@ -4,5 +4,5 @@
 ]]></content>
     <tabTrigger>admonition</tabTrigger>
     <scope>text.html.markdown</scope>
-    <description>MDITA Admonition Block (note, tip, warning)</description>
+    <description>Admonition block (Markdown DITA, no $schema)</description>
 </snippet>
