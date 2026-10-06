@@ -3,8 +3,44 @@
     "completions": [
         {
             "trigger": "$schema",
-            "contents": "\\$schema: ${1:urn:oasis:names:tc:mdita:rng:topic.rng}",
-            "annotation": "MDITA topic type schema",
+            "contents": "\\$schema: urn:oasis:names:tc:dita:xsd:topic.xsd",
+            "annotation": "Markdown DITA topic",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "$schema",
+            "contents": "\\$schema: urn:oasis:names:tc:dita:xsd:concept.xsd",
+            "annotation": "Markdown DITA concept",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "$schema",
+            "contents": "\\$schema: urn:oasis:names:tc:dita:xsd:task.xsd",
+            "annotation": "Markdown DITA task",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "$schema",
+            "contents": "\\$schema: urn:oasis:names:tc:dita:xsd:reference.xsd",
+            "annotation": "Markdown DITA reference",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "$schema",
+            "contents": "\\$schema: urn:oasis:names:tc:dita:xsd:map.xsd",
+            "annotation": "Markdown DITA map",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "$schema",
+            "contents": "\\$schema: urn:oasis:names:tc:mdita:extended:xsd:topic.xsd",
+            "annotation": "MDITA extended profile",
+            "kind": "snippet"
+        },
+        {
+            "trigger": "$schema",
+            "contents": "\\$schema: urn:oasis:names:tc:mdita:core:xsd:topic.xsd",
+            "annotation": "MDITA core profile",
             "kind": "snippet"
         },
         {

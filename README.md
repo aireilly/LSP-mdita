@@ -136,7 +136,7 @@ Tab-trigger snippets are available in Markdown files for common MDITA constructs
 
 | Tab Trigger | Description | Output |
 |---|---|---|
-| `mdita-topic` | Full MDITA topic template | YAML front matter with `$schema` + heading + body |
+| `mdita-topic` | Full topic template | YAML front matter with `$schema` + heading + body |
 | `frontmatter` | YAML front matter block | `---` block with `$schema`, `id`, `author` |
 | `xref` | Cross-reference link | `[link text](filename.md)` |
 | `fragref` | DITA fragment ID link | `[link text](filename.md#topicID/sectionID)` |
@@ -146,10 +146,10 @@ Tab-trigger snippets are available in Markdown files for common MDITA constructs
 | `datakeyref` | Inline keyword keyref | `<span data-keyref="key-name">` |
 | `conref` | Content reference | `<p data-conref="shared.md#topic-id/element-id">` |
 | `conkeyref` | Content key reference | `<span data-conkeyref="key-name/element-id">` |
-| `task` | Task topic skeleton | `{.task}` title with Prerequisites, Procedure, Verification |
+| `task` | Task topic skeleton | `$schema` task front matter with Prerequisites, Procedure, Verification |
 | `admonition` | Admonition block | `!!! note` with content |
 
-`admonition` only works in Markdown DITA files with no `$schema`; the plug-in does not enable admonitions for MDITA or for schema-declared topics.
+`admonition` works in Markdown DITA files, including topics typed by a `dita` `$schema`, from plug-in 6.2.0 onwards. Earlier versions do not enable admonitions for schema-declared topics. The MDITA profiles never support them.
 
 ## Completions
 
@@ -157,7 +157,9 @@ YAML front matter field completions are provided when editing Markdown files. Ty
 
 `$schema`, `id`, `author`, `source`, `publisher`, `permissions`, `audience`, `category`, `keyword`, `resourceid`
 
-There is no `shortdesc` key. The plug-in builds `<shortdesc>` from the first paragraph after the title, when the title carries a `{.concept}`, `{.task}`, or `{.reference}` class or the topic declares a `$schema`.
+There is no `shortdesc` key. The plug-in builds `<shortdesc>` from the first paragraph after the title, when the topic declares a `$schema` or the title carries a `{.concept}`, `{.task}`, or `{.reference}` class.
+
+The `$schema` completions offer the Markdown DITA types first (`topic`, `concept`, `task`, `reference`, `map`), then the MDITA profiles. Prefer a `dita` value: the MDITA profiles cannot express a task, drop `{...}` attribute blocks, and reduce the element set.
 
 ## Reporting issues
 
