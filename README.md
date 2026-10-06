@@ -136,8 +136,8 @@ Tab-trigger snippets are available in Markdown files for common MDITA constructs
 
 | Tab Trigger | Description | Output |
 |---|---|---|
-| `mdita-topic` | Full topic template | YAML front matter with `$schema` + heading + body |
-| `frontmatter` | YAML front matter block | `---` block with `$schema`, `id`, `author` |
+| `mdita-topic` | Full topic template | front matter, title, short description, body (see below) |
+| `frontmatter` | YAML front matter block | `$schema`, `id`, `author` between `---` lines |
 | `xref` | Cross-reference link | `[link text](filename.md)` |
 | `fragref` | DITA fragment ID link | `[link text](filename.md#topicID/sectionID)` |
 | `mapentry` | MDITA map entry | `- [Topic Title](path/to/topic.md)` |
@@ -146,10 +146,60 @@ Tab-trigger snippets are available in Markdown files for common MDITA constructs
 | `datakeyref` | Inline keyword keyref | `<span data-keyref="key-name">` |
 | `conref` | Content reference | `<p data-conref="shared.md#topic-id/element-id">` |
 | `conkeyref` | Content key reference | `<span data-conkeyref="key-name/element-id">` |
-| `task` | Task topic skeleton | `$schema` task front matter with Prerequisites, Procedure, Verification |
+| `task` | Task topic skeleton | task front matter and the four task sections (see below) |
 | `admonition` | Admonition block | `!!! note` with content |
 
 `admonition` works in Markdown DITA files, including topics typed by a `dita` `$schema`, from plug-in 6.2.0 onwards. Earlier versions do not enable admonitions for schema-declared topics. The MDITA profiles never support them.
+
+`mdita-topic` expands to this, with the cursor on each placeholder in turn.
+The first stop is the `$schema` value, so you pick the topic type before
+anything else:
+
+```markdown
+---
+$schema: urn:oasis:names:tc:dita:xsd:topic.xsd
+id: topic-id
+author: Author Name
+---
+
+# Topic Title
+
+Short description of the topic
+
+Topic content goes here.
+```
+
+Replace `topic.xsd` with `concept.xsd`, `task.xsd`, `reference.xsd` or
+`map.xsd` for the other types. The `$schema` completion offers all of them,
+so typing `$schema` and pressing <kbd>Tab</kbd> there is usually quicker than
+editing the value by hand.
+
+`task` expands to a typed task with three of the five section headings the plug-in
+recognizes. Its `$schema` is fixed, since a task skeleton is only ever a task:
+
+```markdown
+---
+$schema: urn:oasis:names:tc:dita:xsd:task.xsd
+id: task-id
+---
+
+# Task title
+
+Short description of the task.
+
+## Prerequisites
+
+What the reader needs before starting.
+
+## Procedure
+
+1.  First step.
+2.  Second step.
+
+## Verification
+
+How the reader confirms the task worked.
+```
 
 ## Completions
 
