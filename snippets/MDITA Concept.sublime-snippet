@@ -1,0 +1,17 @@
+<snippet>
+    <content><![CDATA[---
+\$schema: urn:oasis:names:tc:dita:xsd:concept.xsd
+id: ${1:concept-id}
+author: ${2:Author Name}
+---
+
+# ${3:Concept Title}
+
+${4:Short description of the concept.}
+
+${5:Explain the concept here.}
+]]></content>
+    <tabTrigger>mdita-con</tabTrigger>
+    <scope>text.html.markdown</scope>
+    <description>MDITA Concept Topic Template</description>
+</snippet>

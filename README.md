@@ -14,7 +14,7 @@ See the [mdita-lsp README](https://github.com/aireilly/mdita-lsp#requirements) f
 
 ## Features
 
-Everything that the [mdita-lsp](https://github.com/aireilly/mdita-lsp) language server supports, which includes:
+This package supports all features in the [mdita-lsp](https://github.com/aireilly/mdita-lsp) language server:
 
 - Document and workspace symbols from headings.
 - Completion for inline links, heading anchors, keyrefs, conrefs, task section headings, and YAML front matter keys.
@@ -66,7 +66,7 @@ Everything that the [mdita-lsp](https://github.com/aireilly/mdita-lsp) language 
 
    No runtime dependencies are required -- the binary is self-contained (~4.3 MB).
 
-   Alternatively, build from source:
+   You can also build from source:
    ```bash
    git clone https://github.com/aireilly/mdita-lsp
    cd mdita-lsp
@@ -92,7 +92,7 @@ Open the settings via the command palette:
 Preferences: LSP-mdita Settings
 ```
 
-Or navigate to: **Preferences > Package Settings > LSP > Servers > LSP-mdita**.
+Or go to **Preferences > Package Settings > LSP > Servers > LSP-mdita**.
 
 ### Custom binary path
 
@@ -121,7 +121,7 @@ A document that declares an MDITA `$schema` selects its own profile and override
 
 ## Keyboard Shortcuts
 
-All keybindings are scoped to Markdown files (`text.html.markdown`) and require the corresponding LSP server capability.
+These keybindings work in Markdown files (`text.html.markdown`) when the LSP server supports them.
 
 | Shortcut | Command | Description |
 |---|---|---|
@@ -139,11 +139,14 @@ All keybindings are scoped to Markdown files (`text.html.markdown`) and require 
 
 ## Snippets
 
-Tab-trigger snippets are available in Markdown files for common MDITA constructs:
+Use these tab triggers in Markdown files to add common MDITA content:
 
 | Tab Trigger | Description | Output |
 |---|---|---|
 | `mdita-topic` | Full topic template | front matter, title, short description, body (see below) |
+| `mdita-con` | Concept topic template | concept schema, front matter, title, short description, content |
+| `mdita-ref` | Reference topic template | reference schema, front matter, title, short description, content |
+| `mdita-task` | Task topic template | task schema, front matter, title, short description, all five task sections |
 | `frontmatter` | YAML front matter block | `$schema`, `id`, `author` between `---` lines |
 | `xref` | Cross-reference link | `[link text](filename.md)` |
 | `fragref` | DITA fragment ID link | `[link text](filename.md#topicID/sectionID)` |
@@ -153,7 +156,7 @@ Tab-trigger snippets are available in Markdown files for common MDITA constructs
 | `datakeyref` | Inline keyword keyref | `<span data-keyref="key-name">` |
 | `conref` | Content reference | `<p data-conref="shared.md#topic-id/element-id">` |
 | `conkeyref` | Content key reference | `<span data-conkeyref="key-name/element-id">` |
-| `task` | Task topic skeleton | task front matter and the four task sections (see below) |
+| `task` | Short task topic skeleton | task front matter and task sections |
 | `admonition` | Admonition block | `!!! note` with content |
 
 `admonition` works in Markdown DITA files, including topics typed by a `dita` `$schema`, from plug-in 6.2.0 onwards. Earlier versions do not enable admonitions for schema-declared topics. The MDITA profiles never support them.
@@ -176,18 +179,20 @@ Short description of the topic
 Topic content goes here.
 ```
 
-Replace `topic.xsd` with `concept.xsd`, `task.xsd`, `reference.xsd` or
-`map.xsd` for the other types. The `$schema` completion offers all of them,
-so typing `$schema` and pressing <kbd>Tab</kbd> there is usually quicker than
-editing the value by hand.
+Use `mdita-con`, `mdita-task`, or `mdita-ref` for a template with the matching
+topic type already selected. Replace `topic.xsd` with `map.xsd` for a map, or
+choose any `$schema` completion to select another type in the generic template.
 
-`task` expands to a typed task with three of the five section headings the plug-in
-recognizes. Its `$schema` is fixed, since a task skeleton is only ever a task:
+`mdita-task` adds five task sections: Prerequisites, About this task, Procedure,
+Verification, and Next steps. The server reads each heading as a task section.
+The short `task` trigger still works. Both templates set `$schema` to the task
+type:
 
 ```markdown
 ---
 $schema: urn:oasis:names:tc:dita:xsd:task.xsd
 id: task-id
+author: Author Name
 ---
 
 # Task title
@@ -198,6 +203,10 @@ Short description of the task.
 
 What the reader needs before starting.
 
+## About this task
+
+Background information for the task.
+
 ## Procedure
 
 1.  First step.
@@ -206,6 +215,10 @@ What the reader needs before starting.
 ## Verification
 
 How the reader confirms the task worked.
+
+## Next steps
+
+What the reader should do next.
 ```
 
 ## Completions
@@ -226,7 +239,7 @@ https://github.com/aireilly/LSP-mdita/issues
 
 ## Acknowledgements
 
-This package relies on [LSP](https://packagecontrol.io/packages/LSP) for LSP capabilities in Sublime Text and [mdita-lsp](https://github.com/aireilly/mdita-lsp) for the language server implementation.
+This package uses [LSP](https://packagecontrol.io/packages/LSP) for language features in Sublime Text. It uses [mdita-lsp](https://github.com/aireilly/mdita-lsp) as its language server.
 
 ## License
 
