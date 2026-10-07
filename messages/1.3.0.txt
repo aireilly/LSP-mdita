@@ -1,0 +1,28 @@
+LSP-mdita 1.3.0
+===============
+
+Tracks mdita-lsp v1.2.0.
+
+Requires mdita-lsp 1.2.0 or newer, and the aireilly/org.lwdita
+plug-in fork, 6.3.0 or newer:
+
+    https://github.com/aireilly/mdita-lsp/releases/latest
+    https://github.com/aireilly/org.lwdita/releases/latest
+
+What changed
+------------
+
+  core.mdita.profile is gone. The MDITA profile comes from the
+  $schema, and from the file extension otherwise.
+  core.mdita.apply_to_markdown still extends the MDITA checks to
+  .md and .markdown, for a map that gives those files
+  format="mdita". An old config naming the removed key still loads.
+
+  Absent YAML front matter no longer draws a diagnostic. It is
+  optional in every format the plug-in reads, so the note fired on
+  every markdown file in the workspace and reported no problem. A
+  plain README is quiet now.
+
+  The README says up front that this targets the aireilly fork of
+  org.lwdita. implicit-task-sections exists only there, so against
+  upstream the whole task-section model does not apply.

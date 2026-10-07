@@ -6,6 +6,12 @@
 
 Unlike npm-based LSP helpers, this package expects the `mdita-lsp` binary to be pre-installed on your system.
 
+## Requirements
+
+**This package targets [aireilly/org.lwdita](https://github.com/aireilly/org.lwdita), a fork of [jelovirt/org.lwdita](https://github.com/jelovirt/org.lwdita). Version 6.3.0 or newer.** Against upstream, parts of what the server reports will not match what the build produces: `implicit-task-sections` and its configurable titles exist only in the fork, so upstream turns every `## Prerequisites` into a nested topic instead of a `<prereq>`. Upstream's latest release is 5.9.1.
+
+See the [mdita-lsp README](https://github.com/aireilly/mdita-lsp#requirements) for the install commands. Pair this package with `mdita-lsp` v1.2.0 or newer.
+
 ## Features
 
 Everything that the [mdita-lsp](https://github.com/aireilly/mdita-lsp) language server supports, which includes:
@@ -28,7 +34,7 @@ Everything that the [mdita-lsp](https://github.com/aireilly/mdita-lsp) language 
 - Selection range expansion (line, element, section).
 - File rename refactoring (updates markdown links and map references).
 - Map support for `.mditamap` files and `.md` files declaring the DITA map schema.
-- `.mdita` files are indexed and treated as MDITA, whether or not they declare a `$schema`.
+- The server reads `.mdita` files as MDITA, whether or not they declare a `$schema`.
 - DITA fragment addressing (`file.md#topic-id/element-id`).
 - MDITA core and extended profile awareness.
 
