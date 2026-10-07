@@ -5,6 +5,8 @@ scope: text.html.markdown.mdita
 version: 2
 file_extensions:
   - md
+  - markdown
+  - mdita
   - mditamap
 extends: Packages/Markdown/Markdown.sublime-syntax
 

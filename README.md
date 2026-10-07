@@ -14,7 +14,7 @@ Everything that the [mdita-lsp](https://github.com/aireilly/mdita-lsp) language 
 - Completion for inline links, heading anchors, keyrefs, conrefs, task section headings, and YAML front matter keys.
 - Hover for links, headings, YAML keys, keyrefs, conrefs, task sections, and the task structure the plug-in derives implicitly.
 - `Go to Definition` and `Find References` for headings, links, keyrefs, and conrefs.
-- Diagnostics for broken and ambiguous links, missing front matter, missing short descriptions, heading hierarchy, `$schema` values, MDITA profile violations, footnotes, keyref resolution, conref resolution, and map validation.
+- Diagnostics for broken and ambiguous links, missing short descriptions, heading hierarchy, `$schema` values, MDITA profile violations, footnotes, keyref resolution, conref resolution, and map validation. A skipped heading level and a level-3 heading in MDITA are errors, because both fail the build.
 - Code Lens with reference counts on headings.
 - Rename refactoring across files.
 - Code actions: create missing file, add front matter, add to map, add task sections, fix NBSP, footnotes, and heading levels, build with DITA-OT.
@@ -28,6 +28,7 @@ Everything that the [mdita-lsp](https://github.com/aireilly/mdita-lsp) language 
 - Selection range expansion (line, element, section).
 - File rename refactoring (updates markdown links and map references).
 - Map support for `.mditamap` files and `.md` files declaring the DITA map schema.
+- `.mdita` files are indexed and treated as MDITA, whether or not they declare a `$schema`.
 - DITA fragment addressing (`file.md#topic-id/element-id`).
 - MDITA core and extended profile awareness.
 

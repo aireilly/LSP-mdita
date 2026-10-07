@@ -1,0 +1,40 @@
+LSP-mdita 1.2.0
+===============
+
+Tracks mdita-lsp v1.1.0, which fixes an adversarial review of the
+server against org.lwdita v6.2.0.
+
+Requires mdita-lsp 1.1.0 or newer:
+
+    https://github.com/aireilly/mdita-lsp/releases/latest
+
+What changed in the server
+--------------------------
+
+  Formatting no longer corrupts files. The table formatter split on
+  every pipe, so an escaped pipe or a pipe inside a code span became a
+  cell boundary and the build turned the widened table into a
+  paragraph of literal pipes. Trailing whitespace was stripped
+  unconditionally, taking the two spaces that become <?linebreak?>.
+  Two rules could also emit overlapping edits on one line.
+
+  Edit positions are UTF-16 code units. Typing on a line holding a
+  non-ASCII character used to desync the server's buffer from the
+  editor's, and an out-of-range position crashed the process.
+
+  Heading anchors match the plug-in, including the -1 suffix a
+  duplicate heading gets, so links to #setup-1 resolve.
+
+  A skipped heading level and a level-3 heading in MDITA are errors:
+  both fail the build. Map diagnostics stopped flagging URLs,
+  fragments and images. Diagnostic code 12 is retired.
+
+  Renaming a heading no longer doubles the hashes, and repoints the
+  links that address it.
+
+What changed here
+-----------------
+
+  .mdita and .markdown files get the MDITA syntax, so the server
+  attaches to them. A .mdita topic is MDITA whether or not it declares
+  a $schema.
