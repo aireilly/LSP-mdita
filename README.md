@@ -8,9 +8,9 @@ Unlike npm-based LSP helpers, this package expects the `mdita-lsp` binary to be 
 
 ## Requirements
 
-**This package targets [aireilly/org.lwdita](https://github.com/aireilly/org.lwdita), a fork of [jelovirt/org.lwdita](https://github.com/jelovirt/org.lwdita). Version 6.3.0 or newer.** Against upstream, parts of what the server reports will not match what the build produces: `implicit-task-sections` and its configurable titles exist only in the fork, so upstream turns every `## Prerequisites` into a nested topic instead of a `<prereq>`. Upstream's latest release is 5.9.1.
+**This package targets [aireilly/org.lwdita](https://github.com/aireilly/org.lwdita), a fork of [jelovirt/org.lwdita](https://github.com/jelovirt/org.lwdita). Version 6.4.0 or newer.** Against upstream, parts of what the server reports will not match what the build produces: `implicit-task-sections` and its configurable titles exist only in the fork, so upstream turns every `## Prerequisites` into a nested topic instead of a `<prereq>`. Upstream's latest release is 5.9.1.
 
-See the [mdita-lsp README](https://github.com/aireilly/mdita-lsp#requirements) for the install commands. Pair this package with `mdita-lsp` v1.2.0 or newer.
+See the [mdita-lsp README](https://github.com/aireilly/mdita-lsp#requirements) for the install commands. Pair this package with `mdita-lsp` v1.3.0 or newer.
 
 ## Features
 
@@ -23,7 +23,7 @@ This package supports all features in the [mdita-lsp](https://github.com/aireill
 - Diagnostics for broken and ambiguous links, missing short descriptions, heading hierarchy, `$schema` values, MDITA profile violations, footnotes, keyref resolution, conref resolution, and map validation. A skipped heading level and a level-3 heading in MDITA are errors, because both fail the build.
 - Code Lens with reference counts on headings.
 - Rename refactoring across files.
-- Code actions: create missing file, add front matter, add to map, add task sections, fix NBSP, footnotes, and heading levels, build with DITA-OT.
+- Code actions: create missing file, add front matter, add to map, add task sections, fix NBSP, footnotes, and heading levels, change a nested section to a section heading, add the topic id to a section link, build with DITA-OT.
 - DITA-OT build integration (xhtml, dita output formats).
 - Document formatting (table alignment, trailing whitespace cleanup, heading spacing, trailing newline), including table alignment on save.
 - Inlay hints showing resolved link, keyref, and conref targets.
@@ -36,6 +36,7 @@ This package supports all features in the [mdita-lsp](https://github.com/aireill
 - Map support for `.mditamap` files and `.md` files declaring the DITA map schema.
 - The server reads `.mdita` files as MDITA, whether or not they declare a `$schema`.
 - DITA fragment addressing (`file.md#topic-id/element-id`).
+- In concept and reference topics, `##` starts a `<section>`. Sections don't nest, so `###` is an error. Link to a section as `file.md#topic-id/heading`.
 - MDITA core and extended profile awareness.
 
 ## Installation

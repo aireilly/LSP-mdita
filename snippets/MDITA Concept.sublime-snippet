@@ -10,6 +10,10 @@ author: ${2:Author Name}
 ${4:Short description of the concept.}
 
 ${5:Explain the concept here.}
+
+## ${6:Section title}
+
+${7:Section text.}
 ]]></content>
     <tabTrigger>mdita-con</tabTrigger>
     <scope>text.html.markdown</scope>

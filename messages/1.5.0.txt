@@ -1,0 +1,34 @@
+LSP-mdita 1.5.0
+===============
+
+Tracks mdita-lsp v1.3.0.
+
+Requires mdita-lsp 1.3.0 or newer, and the aireilly/org.lwdita
+plug-in fork, 6.4.0 or newer:
+
+    https://github.com/aireilly/mdita-lsp/releases/latest
+    https://github.com/aireilly/org.lwdita/releases/latest
+
+What changed
+------------
+
+  In a concept or a reference, ## is a section. The plug-in builds it
+  as <section> in <conbody> or <refbody>, which is the topic an author
+  gets from an XML editor. The outline marks those headings as
+  sections, and hover names the DITA element.
+
+  Sections do not nest, so ### under one is an error with a quick fix
+  that changes it to ##.
+
+  A link to a section needs the topic id. file.md#heading draws a
+  warning with a quick fix that rewrites it to
+  file.md#topic-id/heading, and anchor completion offers the qualified
+  form. A link to the topic itself, with or without its id, is
+  unaffected.
+
+  Generic topics and tasks are unchanged: ## there still opens a
+  nested topic. The ordering trap, where a {.section} heading follows
+  a heading that opened a nested topic, now names both headings and
+  offers both ways out.
+
+  The concept and reference snippets insert a ## section.
