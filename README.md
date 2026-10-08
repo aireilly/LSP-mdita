@@ -10,7 +10,7 @@ Unlike npm-based LSP helpers, this package expects the `mdita-lsp` binary to be 
 
 **This package targets [aireilly/org.lwdita](https://github.com/aireilly/org.lwdita), a fork of [jelovirt/org.lwdita](https://github.com/jelovirt/org.lwdita). Version 6.4.0 or newer.** Against upstream, parts of what the server reports will not match what the build produces: `implicit-task-sections` and its configurable titles exist only in the fork, so upstream turns every `## Prerequisites` into a nested topic instead of a `<prereq>`. Upstream's latest release is 5.9.1.
 
-See the [mdita-lsp README](https://github.com/aireilly/mdita-lsp#requirements) for the install commands. Pair this package with `mdita-lsp` v1.3.0 or newer.
+See the [mdita-lsp README](https://github.com/aireilly/mdita-lsp#requirements) for the install commands. Pair this package with `mdita-lsp` v1.3.1 or newer.
 
 ## Features
 

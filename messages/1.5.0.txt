@@ -1,9 +1,9 @@
 LSP-mdita 1.5.0
 ===============
 
-Tracks mdita-lsp v1.3.0.
+Tracks mdita-lsp v1.3.1.
 
-Requires mdita-lsp 1.3.0 or newer, and the aireilly/org.lwdita
+Requires mdita-lsp 1.3.1 or newer, and the aireilly/org.lwdita
 plug-in fork, 6.4.0 or newer:
 
     https://github.com/aireilly/mdita-lsp/releases/latest
