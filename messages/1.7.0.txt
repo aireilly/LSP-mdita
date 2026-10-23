@@ -1,0 +1,17 @@
+LSP-mdita 1.7.0
+===============
+
+What changed
+------------
+
+  The MDITA Markdown syntax highlights a table title. Put the title in
+  square brackets on the line directly after the last table row:
+
+    | Command | Description |
+    | --- | --- |
+    | `start` | Start the service |
+    [Service commands]
+
+  The plug-in builds that line as <table><title>. The line is scoped
+  meta.table.caption.mdita, so a color scheme can style it, and it
+  ends the table.

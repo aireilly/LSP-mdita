@@ -77,3 +77,15 @@ contexts:
       push:
         - fenced-code-block-bash-content
         - fenced-code-block-infostring
+
+  # A `[Title]` line directly after the last table row is the table title,
+  # which the plug-in builds as <table><title>. It ends the table.
+  table-body:
+    - meta_prepend: true
+    - match: ^[ \t]*((\[)([^\]]*)(\]))[ \t]*\n
+      captures:
+        1: meta.table.caption.mdita
+        2: punctuation.definition.caption.begin.mdita
+        3: markup.caption.mdita
+        4: punctuation.definition.caption.end.mdita
+      pop: 1
