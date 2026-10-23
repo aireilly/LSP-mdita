@@ -1,5 +1,6 @@
 <snippet>
     <content><![CDATA[!!! ${1:note}
+
     ${2:Admonition content.}
 ]]></content>
     <tabTrigger>admonition</tabTrigger>
