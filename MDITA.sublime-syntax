@@ -21,3 +21,59 @@ contexts:
     - match: '\}'
       scope: punctuation.definition.attributes.end.mdita
       pop: 1
+
+  # Definition lists: a one-line term followed by `:   description`.
+  # A term is only known once the next line starts with `:`, so the term is
+  # tried as a branch and fails back to a paragraph or setext heading.
+  markdown:
+    - meta_prepend: true
+    - include: definition-descriptions
+
+  setext-headings-or-paragraphs:
+    - match: '{{setext_heading_or_paragraph}}'
+      branch_point: setext-headings-or-paragraphs
+      branch:
+        - definition-term
+        - paragraph
+        - setext-heading2
+        - setext-heading1
+
+  definition-term:
+    - meta_scope: meta.definition.term.mdita
+    - meta_content_scope: entity.name.definition.mdita
+    - match: '\n'
+      set: definition-term-end
+    - include: inlines
+
+  definition-term-end:
+    - match: '^(?=:[ \t])'
+      pop: 1
+    - match: '^'
+      fail: setext-headings-or-paragraphs
+
+  definition-descriptions:
+    - match: '^(:)[ \t]+'
+      captures:
+        1: markup.list.definition.bullet.mdita punctuation.definition.list_item.markdown
+      push: definition-description
+
+  definition-description:
+    - meta_content_scope: markup.list.definition.mdita
+    - include: list-block-end
+    - include: list-block-content
+
+  # `terminal` is the info string that AEM DITA uses for shell sessions.
+  # Highlight it like `console`: a `$` prompt marks commands, and other
+  # lines are output.
+  fenced-code-block-body:
+    - meta_prepend: true
+    - match: |-
+        (?xi)
+        [ \t]*
+        (terminal)
+        {{fenced_code_block_language_break}}
+      captures:
+        1: constant.other.language-name.markdown
+      push:
+        - fenced-code-block-bash-content
+        - fenced-code-block-infostring
