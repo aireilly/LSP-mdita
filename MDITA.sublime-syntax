@@ -23,8 +23,10 @@ contexts:
       pop: 1
 
   # Definition lists: a one-line term followed by `:   description`.
-  # A term is only known once the next line starts with `:`, so the term is
-  # tried as a branch and fails back to a paragraph or setext heading.
+  # A term is only known once the next line starts with `:`. The line is
+  # tried as a paragraph first, which fails over to a term at that `:`.
+  # Trying the paragraph first keeps a one-line paragraph at the end of the
+  # file a paragraph, because a branch still open at EOF keeps its choice.
   markdown:
     - meta_prepend: true
     - include: definition-descriptions
@@ -33,10 +35,27 @@ contexts:
     - match: '{{setext_heading_or_paragraph}}'
       branch_point: setext-headings-or-paragraphs
       branch:
+        - paragraph-first-line
         - definition-term
-        - paragraph
         - setext-heading2
         - setext-heading1
+
+  paragraph-first-line:
+    - meta_scope: meta.paragraph.markdown
+    - match: '\n'
+      set: paragraph-second-line
+    - include: paragraph-end
+    - include: math-blocks
+    - include: inlines
+
+  paragraph-second-line:
+    - meta_scope: meta.paragraph.markdown
+    - match: '^(?=:[ \t])'
+      fail: setext-headings-or-paragraphs
+    - include: paragraph-fail
+    - include: paragraph-end
+    - match: '^'
+      set: paragraph
 
   definition-term:
     - meta_scope: meta.definition.term.mdita
