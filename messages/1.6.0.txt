@@ -1,0 +1,17 @@
+LSP-mdita 1.6.0
+===============
+
+What changed
+------------
+
+  The MDITA Markdown syntax highlights definition lists. A term line
+  followed by a `:   description` line is a definition list entry. The
+  description is a block, so fenced code indented under it highlights
+  as code instead of running on as paragraph text.
+
+  The `:` marker is scoped markup.list.definition.bullet.mdita, and the
+  term meta.definition.term.mdita, so a color scheme can style either.
+
+  Fenced code blocks marked `terminal` highlight like `console`: a line
+  that starts with `$ ` is a command, and other lines are output. AEM
+  DITA uses `language-terminal` for shell sessions.

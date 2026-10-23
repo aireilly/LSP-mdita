@@ -28,6 +28,7 @@ This package supports all features in the [mdita-lsp](https://github.com/aireill
 - Document formatting (table alignment, trailing whitespace cleanup, heading spacing, trailing newline), including table alignment on save.
 - Inlay hints showing resolved link, keyref, and conref targets.
 - Semantic token highlighting for `{.class}` block attributes.
+- Syntax highlighting for definition lists (a term line followed by `:   description`), including fenced code inside a description, and for `terminal` code blocks, which highlight like `console`.
 - Linked editing of heading text.
 - Document highlight for a heading and its intra-document references.
 - Folding ranges for headings and YAML front matter.
